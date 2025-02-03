@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+
+
+<form id="generateForm">
+    <input type="text" id="topic" placeholder="Enter Topic" required />
+    <input type="number" id="grade" placeholder="Enter Grade" required />
+    <input type="number" id="numQuestions" placeholder="Number of Questions" required />
+    <button type="submit">Generate Questions</button>
+</form>
+
+<div id="questions" class=" p-4" ></div>
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#generateForm').submit(function (event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            var topic = $('#topic').val();
+            var grade = $('#grade').val();
+            var numQuestions = $('#numQuestions').val();
+
+            // Send AJAX request to generate questions
+            $.ajax({
+                url: '/Home/GenerateQuestions',
+                method: 'POST',
+                data: {
+                    topic: topic,
+                    grade: grade,
+                    numberOfQuestions: numQuestions
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Replace \n with <br> for HTML formatting
+                        $('#questions').html(response.questions.replace(/\n/g, '<br> <br>'));
+                    } else {
+                        alert("Error: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert('Error generating questions.');
+                }
+            });
+        });
+    });
+
+
+</script>
+
+

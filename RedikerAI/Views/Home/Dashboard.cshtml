@@ -1,0 +1,40 @@
+﻿@model RedikerAI.Models.User
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<div>
+    <h3>User Information</h3>
+    <table class="table">
+        <tr>
+            <td><strong>First Name</strong></td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td><strong>Last Name</strong></td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td><strong>School Name</strong></td>
+            <td>@Model.SchoolName</td>
+        </tr>
+        <tr>
+            <td><strong>State</strong></td>
+            <td>@Model.State</td>
+        </tr>
+        <tr>
+            <td><strong>Country</strong></td>
+            <td>@Model.Country</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Optionally, you can add links or additional functionality -->
+<a href="@Url.Action("Logout", "Account")">Logout</a>
